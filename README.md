@@ -85,7 +85,7 @@ input.data = new short[] { 0x01, 0x02, 0x03 };
 ```
 ## 示例
 
-请参阅[测试用例](./src/test/io/github/sollyu/test/StructTest.java)。
+请参阅[测试用例](./src/test/java/io/github/sollyu/test/StructTest.java)。
 
 ## License
 
