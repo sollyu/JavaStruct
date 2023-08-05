@@ -1,9 +1,8 @@
-plugins {
-    id 'java'
-}
+apply plugin: 'java'
+apply plugin: 'maven-publish'
 
 group = 'io.github.sollyu'
-version = '1.0.0-SNAPSHOT'
+version = '1.0.0'
 
 repositories {
     mavenCentral()
@@ -17,4 +16,36 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+tasks.register('sourcesJar', Jar) {
+    dependsOn classes
+    archiveClassifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId "struct"
+            from components.java
+            artifact sourcesJar
+        }
+    }
+    repositories {
+        mavenLocal()
+        maven {
+            name = "Gitea"
+            url = uri("https://s.9x6.cn/api/packages/sollyu/maven")
+
+            credentials(HttpHeaderCredentials) {
+                name = "Authorization"
+                value = "token ${System.getenv("GITEA_PUBLISH_TOKEN")}"
+            }
+
+            authentication {
+                header(HttpHeaderAuthentication)
+            }
+        }
+    }
 }
