@@ -16,8 +16,34 @@
 
 package io.github.sollyu.struct;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.nio.ByteOrder;
+
 /**
  * 被标记为结构体的接口
  */
 public interface IJavaStruct {
+
+    /**
+     * 打包
+     *
+     * @param byteOrder 字节序
+     * @return 数据
+     */
+    default byte[] toBytes(@NotNull ByteOrder byteOrder) {
+        return JavaStruct.pack(this, byteOrder);
+    }
+
+
+    /**
+     * 解包
+     *
+     * @param data      数据
+     * @param byteOrder 字节序
+     */
+    default void fromBytes(byte @NotNull [] data, @NotNull ByteOrder byteOrder) {
+        JavaStruct.unpack(data, this, byteOrder);
+    }
+
 }

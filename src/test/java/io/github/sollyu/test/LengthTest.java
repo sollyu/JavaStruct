@@ -44,7 +44,7 @@ public class LengthTest implements IJavaStruct {
         String hexString = "7E 0C 00 00 00 00 00 00 00 00 00 00 00 00 00 7E";
         byte[] bytes = StringUtils.hexStringToByteArray(hexString);
         LengthTest output = new LengthTest();
-        JavaStruct.unpack(bytes, output, ByteOrder.LITTLE_ENDIAN);
+        output.fromBytes(bytes, ByteOrder.LITTLE_ENDIAN);
 
         Assertions.assertEquals(output.startFlag, 0x7E);
         Assertions.assertEquals(output.length, 0x000C);
@@ -59,7 +59,7 @@ public class LengthTest implements IJavaStruct {
         input.data = new byte[0x00C];
         input.endFlag = 0x7E;
 
-        byte[] output = JavaStruct.pack(input, ByteOrder.LITTLE_ENDIAN);
+        byte[] output = input.toBytes(ByteOrder.LITTLE_ENDIAN);
         String hexString = ByteArrayUtils.byteArrayToHexString(output);
         Assertions.assertEquals(input.length, 0x000C);
         Assertions.assertEquals(hexString, "7E 0C 00 00 00 00 00 00 00 00 00 00 00 00 00 7E");
