@@ -24,12 +24,8 @@ import io.github.sollyu.struct.core.util.JavaStructFieldComparator;
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInput;
-import java.io.DataInputStream;
-import java.io.InputStream;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.nio.ByteOrder;
 import java.util.*;
 
@@ -136,6 +132,8 @@ public class JavaStructUnpack implements Runnable {
                     .findFirst();
             if (sizeof.isPresent()) {
                 handleArraySizeOf(entry, sizeof.get().getValue());
+            } else {
+                handleArrayLength(entry, output.onFieldUnknownLength(entry.getKey().order()));
             }
         } else {
             handleArrayLength(entry, Array.getLength(value));

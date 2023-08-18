@@ -46,4 +46,16 @@ public interface IJavaStruct {
         JavaStruct.unpack(data, this, byteOrder);
     }
 
+    /**
+     * 获取未知长度
+     * <p>
+     * 用于长度需要动态计算的字段
+     *
+     * @param order 字段序号
+     * @return 长度
+     */
+    default int onFieldUnknownLength(int order) {
+        throw new UnsupportedOperationException();
+    }
+
 }
