@@ -103,6 +103,7 @@ public class JavaStructUnpack implements Runnable {
     public void run() throws RuntimeException {
         try {
             runWithException();
+            output.onFromBytesFinished();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -120,7 +121,8 @@ public class JavaStructUnpack implements Runnable {
             }
             entry.getValue().set(output, value);
         }
-        new JavaStructUnpack(dataInputStream, (IJavaStruct) value).run();
+        IJavaStruct javaStruct = (IJavaStruct) value;
+        new JavaStructUnpack(dataInputStream, javaStruct).run();
     }
 
     private void handleArray(Map.Entry<JavaStruct.Field, Field> entry) throws Exception {
@@ -187,9 +189,7 @@ public class JavaStructUnpack implements Runnable {
     private void handleArrayLengthByte(Map.Entry<JavaStruct.Field, Field> entry, Integer size, Class<?> fieldType) throws Exception {
         if (fieldType.equals(byte[].class)) {
             byte[] array = new byte[size];
-            for (int i = 0; i < size; i++) {
-                array[i] = dataInputStream.readByte();
-            }
+            dataInputStream.readFully(array);
             entry.getValue().set(output, array);
         } else if (fieldType.equals(Byte[].class)) {
             Byte[] array = new Byte[size];

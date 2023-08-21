@@ -58,4 +58,9 @@ public interface IJavaStruct {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * 从字节数组中解包完成
+     */
+    default void onFromBytesFinished() {
+    }
 }

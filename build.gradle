@@ -36,7 +36,7 @@ publishing {
         mavenLocal()
         maven {
             name = "Gitea"
-            url = uri("https://s.9x6.cn/api/packages/sollyu/maven")
+            url = uri("https://git.frp.9x6.cn/api/packages/sollyu/maven")
 
             credentials(HttpHeaderCredentials) {
                 name = "Authorization"

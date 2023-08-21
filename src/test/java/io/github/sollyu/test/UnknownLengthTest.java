@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.nio.ByteOrder;
+import java.util.ArrayList;
 
 import static io.github.sollyu.test.utils.StringUtils.hexStringToByteArray;
 
@@ -74,7 +75,6 @@ public class UnknownLengthTest implements IJavaStruct {
         UnknownLengthTest output = new UnknownLengthTest();
         output.fromBytes(bytes, ByteOrder.LITTLE_ENDIAN);
 
-        System.out.println(output);
         Assertions.assertEquals(0x7E, output.startFlag);
         Assertions.assertEquals(0x7E, output.endFlag);
         Assertions.assertEquals(0x72A3, output.crc);

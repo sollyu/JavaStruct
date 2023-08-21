@@ -18,8 +18,8 @@ package io.github.sollyu.test;
 
 import io.github.sollyu.struct.IJavaStruct;
 import io.github.sollyu.struct.JavaStruct;
-import io.github.sollyu.test.utils.ByteArrayUtils;
 import io.github.sollyu.test.beans.CommandItem01;
+import io.github.sollyu.test.utils.ByteArrayUtils;
 import io.github.sollyu.test.utils.StringUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

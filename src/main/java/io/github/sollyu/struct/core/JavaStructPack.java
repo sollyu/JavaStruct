@@ -134,14 +134,14 @@ public class JavaStructPack implements Supplier<byte[]> {
             arraySize = value == null ? 0 : value.length;
         } else if (arrayFieldType.equals(long[].class)) {
             long[] value = (long[]) arrayEntry.getValue().get(input);
-            arraySize =value == null ? 0 : value.length;
+            arraySize = value == null ? 0 : value.length;
         } else if (arrayFieldType.equals(float[].class)) {
             float[] value = (float[]) arrayEntry.getValue().get(input);
             arraySize = value == null ? 0 : value.length;
         } else if (arrayFieldType.equals(double[].class)) {
             double[] value = (double[]) arrayEntry.getValue().get(input);
             arraySize = value == null ? 0 : value.length;
-        }  else if (IJavaStruct[].class.isAssignableFrom(arrayFieldType)) {
+        } else if (IJavaStruct[].class.isAssignableFrom(arrayFieldType)) {
             IJavaStruct[] value = (IJavaStruct[]) arrayEntry.getValue().get(input);
             arraySize = value == null ? 0 : value.length;
         } else {

@@ -50,12 +50,13 @@ public class StructArray01Test implements IJavaStruct {
         Assertions.assertEquals(input.length, 0x0000);
     }
 
-    @Test void pack() {
+    @Test
+    void pack() {
         StructArray01Test input = new StructArray01Test();
         input.serverId = 0x01;
         CommandItem01 item1 = new CommandItem01((byte) 0x01, (byte) 0x06, (byte) 0x0E);
         CommandItem01 item2 = new CommandItem01((byte) 0x00, (byte) 0x06, (byte) 0x0E);
-        input.data = new CommandItem01[] { item1, item2 };
+        input.data = new CommandItem01[]{item1, item2};
 
         byte[] output = JavaStruct.pack(input, ByteOrder.LITTLE_ENDIAN);
         String hexString = ByteArrayUtils.byteArrayToHexString(output);

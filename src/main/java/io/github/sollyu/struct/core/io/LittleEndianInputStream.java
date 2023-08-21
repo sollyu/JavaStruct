@@ -18,7 +18,10 @@ package io.github.sollyu.struct.core.io;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.*;
+import java.io.DataInput;
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class LittleEndianInputStream implements DataInput {
 
