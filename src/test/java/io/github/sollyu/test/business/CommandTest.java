@@ -9,6 +9,13 @@ import org.junit.jupiter.api.Test;
 
 import java.nio.ByteOrder;
 
+/**
+ * 实际业务中使用的复杂结构体
+ * 里面包含：
+ * 1. 动态长度的数组
+ * 2. 动态长度的子结构体
+ * 3. 动态长度的子结构体数组
+ */
 public class CommandTest implements IJavaStruct {
 
     @JavaStruct.Field(order = 1)
@@ -68,13 +75,16 @@ public class CommandTest implements IJavaStruct {
             }
         }
 
+        /**
+         * 根据功能ID，动态解析数据
+         * 使用时，需要根据功能ID，强制转换为对应的类型
+         */
         @Nullable
         private Item[] data_ = null;
 
         public Item[] getData() {
             return data_;
         }
-
 
         public static class Item implements IJavaStruct {
             @JavaStruct.Field(order = 0)
@@ -113,6 +123,7 @@ public class CommandTest implements IJavaStruct {
 
                     case 0x0C: {
                         var data_ = new Data0C[]{
+                                new Data0C(), new Data0C(), new Data0C(), new Data0C(), new Data0C(),
                                 new Data0C(), new Data0C(), new Data0C(), new Data0C(), new Data0C(),
                         };
                         try {
@@ -199,8 +210,6 @@ public class CommandTest implements IJavaStruct {
 
         CommandTest commandTest = new CommandTest();
         commandTest.fromBytes(bytes, ByteOrder.LITTLE_ENDIAN);
-
-        System.out.println(commandTest);
 
         Assertions.assertEquals(commandTest.data.getData().length, 12);
 
