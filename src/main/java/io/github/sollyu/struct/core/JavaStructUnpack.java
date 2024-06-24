@@ -28,6 +28,7 @@ import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.nio.ByteOrder;
 import java.util.*;
+import java.util.function.Predicate;
 
 public class JavaStructUnpack implements Runnable {
 
@@ -130,7 +131,18 @@ public class JavaStructUnpack implements Runnable {
         if (value == null) {
             Optional<Map.Entry<JavaStruct.Field, Field>> sizeof = fieldMap.entrySet()
                     .stream()
-                    .filter(e -> Objects.equals(e.getKey().sizeof(), entry.getValue().getName()))
+                    .filter(fieldFieldEntry -> {
+                        if (Objects.equals(fieldFieldEntry.getKey().sizeof(), entry.getValue().getName())) {
+                            return true;
+                        }
+
+                        String annotationName = entry.getValue().getAnnotation(JavaStruct.Field.class).name();
+                        if (annotationName.isEmpty()){
+                            return false;
+                        }
+
+                        return Objects.equals(fieldFieldEntry.getKey().sizeof(), annotationName);
+                    })
                     .findFirst();
             if (sizeof.isPresent()) {
                 handleArraySizeOf(entry, sizeof.get().getValue());

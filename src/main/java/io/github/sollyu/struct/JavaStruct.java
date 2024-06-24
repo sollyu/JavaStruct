@@ -49,6 +49,12 @@ public class JavaStruct {
          * @return
          */
         String sizeof() default "";
+
+        /**
+         * 字段名称
+         * @return
+         */
+        String name() default "";
     }
 
     /**

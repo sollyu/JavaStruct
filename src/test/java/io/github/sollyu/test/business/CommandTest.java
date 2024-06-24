@@ -53,7 +53,7 @@ public class CommandTest implements IJavaStruct {
             IJavaStruct.super.onFromBytesFinished();
             switch (this.functionId) {
                 case 0x04:
-                    var data_ = new Item[]{
+                    Item[] data_ = new Item[]{
                             new Item(), new Item(), new Item(), new Item(), new Item(),
                             new Item(), new Item(), new Item(), new Item(), new Item(),
                             new Item(), new Item(), new Item(), new Item(), new Item(),
@@ -101,7 +101,7 @@ public class CommandTest implements IJavaStruct {
                 IJavaStruct.super.onFromBytesFinished();
                 switch (this.subId) {
                     case 0x03: {
-                        var data_ = new Data03();
+                        Data03 data_ = new Data03();
                         try {
                             JavaStruct.unpack(data, data_, ByteOrder.LITTLE_ENDIAN);
                         } catch (Exception ignored) {
@@ -111,7 +111,7 @@ public class CommandTest implements IJavaStruct {
                     }
 
                     case 0x05: {
-                        var data_ = new Data05();
+                        Data05 data_ = new Data05();
                         try {
                             JavaStruct.unpack(data, data_, ByteOrder.LITTLE_ENDIAN);
                         } catch (Exception ignored) {
@@ -122,7 +122,7 @@ public class CommandTest implements IJavaStruct {
 
 
                     case 0x0C: {
-                        var data_ = new Data0C[]{
+                        Data0C[] data_ = new Data0C[]{
                                 new Data0C(), new Data0C(), new Data0C(), new Data0C(), new Data0C(),
                                 new Data0C(), new Data0C(), new Data0C(), new Data0C(), new Data0C(),
                         };
@@ -214,17 +214,17 @@ public class CommandTest implements IJavaStruct {
         Assertions.assertEquals(commandTest.data.getData().length, 12);
 
         {
-            var item02 = commandTest.data.getData()[2];
+            Data.Item item02 = commandTest.data.getData()[2];
             Assertions.assertInstanceOf(Data.Item.Data03.class,item02.getData());
-            var data03 = (Data.Item.Data03) item02.getData();
+            Data.Item.Data03 data03 = (Data.Item.Data03) item02.getData();
             Assertions.assertEquals(data03.frame, 0x07E8);
             Assertions.assertEquals(data03.mask, 0xFFFFFFFF);
         }
 
         {
-            var item04 = commandTest.data.getData()[4];
+            Data.Item item04 = commandTest.data.getData()[4];
             Assertions.assertInstanceOf(Data.Item.Data05.class,item04.getData());
-            var data05 = (Data.Item.Data05) item04.getData();
+            Data.Item.Data05 data05 = (Data.Item.Data05) item04.getData();
             Assertions.assertEquals(data05.length, 0x01);
             Assertions.assertEquals(data05.data.length, 0x01);
             Assertions.assertEquals(data05.data[0].length, 0x0B);
@@ -233,11 +233,11 @@ public class CommandTest implements IJavaStruct {
         }
 
         {
-            var item0B = commandTest.data.getData()[11];
+            Data.Item item0B = commandTest.data.getData()[11];
             Assertions.assertInstanceOf(Data.Item.Data0C[].class,item0B.getData());
-            var data0C = (Data.Item.Data0C[]) item0B.getData();
+            Data.Item.Data0C[] data0C = (Data.Item.Data0C[]) item0B.getData();
             Assertions.assertEquals(data0C.length, 2);
-            var data0C0 = data0C[0];
+            Data.Item.Data0C data0C0 = data0C[0];
             Assertions.assertEquals(data0C0.subId, 0x01);
             Assertions.assertEquals(data0C0.length, 0x01);
             Assertions.assertEquals(data0C0.data.length, 0x01);

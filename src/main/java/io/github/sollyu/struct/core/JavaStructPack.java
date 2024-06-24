@@ -108,7 +108,7 @@ public class JavaStructPack implements Supplier<byte[]> {
         }
         Optional<Map.Entry<JavaStruct.Field, Field>> arrayEntryOptional = fieldMap.entrySet()
                 .stream()
-                .filter(e -> Objects.equals(e.getValue().getName(), sizeOf))
+                .filter(e -> Objects.equals(e.getValue().getName(), sizeOf) || Objects.equals(e.getValue().getAnnotation(JavaStruct.Field.class).name(), sizeOf))
                 .findFirst();
         if (!arrayEntryOptional.isPresent()) {
             throw new Exception("Can't find field " + sizeOf);
