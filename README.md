@@ -6,6 +6,14 @@ JavaStruct是一个用于Java的结构体库，它可以让你像C语言一样�
 
 ## 使用
 
+最新版本：[![](https://jitpack.io/v/sollyu/JavaStruct.svg)](https://jitpack.io/#sollyu/JavaStruct)
+
+```gradle
+dependencies {
+    implementation 'com.github.sollyu:JavaStruct:1.0.5'
+}
+```
+
 ### 定义结构体
 
 ```java
