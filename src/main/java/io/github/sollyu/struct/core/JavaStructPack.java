@@ -81,6 +81,9 @@ public class JavaStructPack implements Supplier<byte[]> {
             } else if (fieldType.equals(String.class)) {
                 outputStream.writeUTF((String) field.get(input));
             } else if (IJavaStruct.class.isAssignableFrom(fieldType)) {
+                if (Objects.isNull(field.get(input))) {
+                    continue;
+                }
                 new JavaStructPack(outputStream, (IJavaStruct) field.get(input)).getWithException();
             } else if (fieldType.isArray()) {
                 handleArray(entry);
