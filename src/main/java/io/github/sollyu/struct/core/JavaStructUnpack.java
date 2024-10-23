@@ -327,9 +327,9 @@ public class JavaStructUnpack implements Runnable {
         } else if (sizeUnknownType instanceof Long) {
             value = ((Long) sizeUnknownType).intValue();
         } else if (sizeUnknownType instanceof Short) {
-            value = ((Short) sizeUnknownType).intValue();
+            value = ((Short) sizeUnknownType) & 0xFFFF;
         } else if (sizeUnknownType instanceof Byte) {
-            value = ((Byte) sizeUnknownType).intValue();
+            value = ((Byte) sizeUnknownType) & 0xFF;
         } else {
             throw new RuntimeException("sizeof type is not support: " + sizeUnknownType.getClass().getName());
         }
