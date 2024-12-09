@@ -21,9 +21,11 @@ import io.github.sollyu.struct.core.JavaStructUnpack;
 import io.github.sollyu.struct.core.io.BigEndianInputStream;
 import io.github.sollyu.struct.core.io.LittleEndianInputStream;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInput;
+import java.io.IOException;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -52,6 +54,7 @@ public class JavaStruct {
 
         /**
          * 字段名称
+         *
          * @return
          */
         String name() default "";

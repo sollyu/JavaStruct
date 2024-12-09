@@ -60,7 +60,6 @@ public class JavaStructUnpack implements Runnable {
         this.output = output;
     }
 
-
     private void runWithException() throws Exception {
         for (Field field : output.getClass().getFields()) {
             JavaStruct.Field annotation = field.getAnnotation(JavaStruct.Field.class);
@@ -129,27 +128,31 @@ public class JavaStructUnpack implements Runnable {
     private void handleArray(Map.Entry<JavaStruct.Field, Field> entry) throws Exception {
         Object value = entry.getValue().get(output);
         if (value == null) {
-            Optional<Map.Entry<JavaStruct.Field, Field>> sizeof = fieldMap.entrySet()
-                    .stream()
-                    .filter(fieldFieldEntry -> {
-                        if (Objects.equals(fieldFieldEntry.getKey().sizeof(), entry.getValue().getName())) {
-                            return true;
-                        }
+            Optional<Map.Entry<JavaStruct.Field, Field>> sizeof = Optional.empty();
+            for (Map.Entry<JavaStruct.Field, Field> fieldFieldEntry : fieldMap.entrySet()) {
+                // 检查是否匹配sizeof的名称
+                boolean matchSizeofName = Objects.equals(fieldFieldEntry.getKey().sizeof(), entry.getValue().getName());
 
-                        String annotationName = entry.getValue().getAnnotation(JavaStruct.Field.class).name();
-                        if (annotationName.isEmpty()){
-                            return false;
-                        }
+                // 检查是否有注解名称且是否匹配
+                boolean matchAnnotationName = !entry.getValue().getAnnotation(JavaStruct.Field.class).name().isEmpty() &&
+                        Objects.equals(fieldFieldEntry.getKey().sizeof(), entry.getValue().getAnnotation(JavaStruct.Field.class).name());
 
-                        return Objects.equals(fieldFieldEntry.getKey().sizeof(), annotationName);
-                    })
-                    .findFirst();
+                // 如果匹配，保存匹配的entry并退出循环
+                if (matchSizeofName || matchAnnotationName) {
+                    sizeof = Optional.of(fieldFieldEntry);
+                    break;
+                }
+            }
+
+            // 如果找到了匹配的sizeof，处理数组sizeof
             if (sizeof.isPresent()) {
                 handleArraySizeOf(entry, sizeof.get().getValue());
             } else {
+                // 如果没有找到匹配的sizeof，处理未知长度的数组
                 handleArrayLength(entry, output.onFieldUnknownLength(entry.getKey().order()));
             }
         } else {
+            // 如果value不为null，处理数组长度
             handleArrayLength(entry, Array.getLength(value));
         }
     }
