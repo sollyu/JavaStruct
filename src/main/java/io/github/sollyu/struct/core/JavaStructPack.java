@@ -109,14 +109,17 @@ public class JavaStructPack implements Supplier<byte[]> {
         if (sizeOf.isEmpty()) {
             return;
         }
-        Optional<Map.Entry<JavaStruct.Field, Field>> arrayEntryOptional = fieldMap.entrySet()
-                .stream()
-                .filter(e -> Objects.equals(e.getValue().getName(), sizeOf) || Objects.equals(e.getValue().getAnnotation(JavaStruct.Field.class).name(), sizeOf))
-                .findFirst();
-        if (!arrayEntryOptional.isPresent()) {
+        Map.Entry<JavaStruct.Field, Field> arrayEntry = null;
+        for (Map.Entry<JavaStruct.Field, Field> e : fieldMap.entrySet()) {
+            if (Objects.equals(e.getValue().getName(), sizeOf) ||
+                    Objects.equals(e.getValue().getAnnotation(JavaStruct.Field.class).name(), sizeOf)) {
+                arrayEntry = e;
+                break;
+            }
+        }
+        if (arrayEntry == null) {
             throw new Exception("Can't find field " + sizeOf);
         }
-        Map.Entry<JavaStruct.Field, Field> arrayEntry = arrayEntryOptional.get();
 
         Integer arraySize = 0;
         Class<?> arrayFieldType = arrayEntry.getValue().getType();

@@ -28,7 +28,6 @@ import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.nio.ByteOrder;
 import java.util.*;
-import java.util.function.Predicate;
 
 public class JavaStructUnpack implements Runnable {
 
@@ -128,7 +127,7 @@ public class JavaStructUnpack implements Runnable {
     private void handleArray(Map.Entry<JavaStruct.Field, Field> entry) throws Exception {
         Object value = entry.getValue().get(output);
         if (value == null) {
-            Optional<Map.Entry<JavaStruct.Field, Field>> sizeof = Optional.empty();
+            Map.Entry<JavaStruct.Field, Field> sizeofEntry = null;
             for (Map.Entry<JavaStruct.Field, Field> fieldFieldEntry : fieldMap.entrySet()) {
                 // 检查是否匹配sizeof的名称
                 boolean matchSizeofName = Objects.equals(fieldFieldEntry.getKey().sizeof(), entry.getValue().getName());
@@ -139,14 +138,14 @@ public class JavaStructUnpack implements Runnable {
 
                 // 如果匹配，保存匹配的entry并退出循环
                 if (matchSizeofName || matchAnnotationName) {
-                    sizeof = Optional.of(fieldFieldEntry);
+                    sizeofEntry = fieldFieldEntry;
                     break;
                 }
             }
 
             // 如果找到了匹配的sizeof，处理数组sizeof
-            if (sizeof.isPresent()) {
-                handleArraySizeOf(entry, sizeof.get().getValue());
+            if (sizeofEntry != null) {
+                handleArraySizeOf(entry, sizeofEntry.getValue());
             } else {
                 // 如果没有找到匹配的sizeof，处理未知长度的数组
                 handleArrayLength(entry, output.onFieldUnknownLength(entry.getKey().order()));
