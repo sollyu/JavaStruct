@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 sollyu.com.
+ * Copyright (c) 2023-2025 sollyu.com..
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,12 +35,12 @@ public class LittleEndianOutputStream extends FilterOutputStream implements Data
     }
 
     @Override
-    public void write(byte @NotNull [] b) throws IOException {
+    public void write(@NotNull byte[] b) throws IOException {
         dataOutputStream.write(b);
     }
 
     @Override
-    public void write(byte @NotNull [] b, int off, int len) throws IOException {
+    public void write(@NotNull byte[] b, int off, int len) throws IOException {
         dataOutputStream.write(b, off, len);
     }
 

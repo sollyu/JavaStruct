@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 sollyu.com.
+ * Copyright (c) 2023-2025 sollyu.com..
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,10 @@ import java.io.DataInput;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.nio.ByteOrder;
-import java.util.*;
+import java.util.Map;
+import java.util.Objects;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 public class JavaStructUnpack implements Runnable {
 
@@ -134,7 +137,7 @@ public class JavaStructUnpack implements Runnable {
 
                 // 检查是否有注解名称且是否匹配
                 boolean matchAnnotationName = !entry.getValue().getAnnotation(JavaStruct.Field.class).name().isEmpty() &&
-                        Objects.equals(fieldFieldEntry.getKey().sizeof(), entry.getValue().getAnnotation(JavaStruct.Field.class).name());
+                    Objects.equals(fieldFieldEntry.getKey().sizeof(), entry.getValue().getAnnotation(JavaStruct.Field.class).name());
 
                 // 如果匹配，保存匹配的entry并退出循环
                 if (matchSizeofName || matchAnnotationName) {

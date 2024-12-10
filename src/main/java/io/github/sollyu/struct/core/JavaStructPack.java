@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 sollyu.com.
+ * Copyright (c) 2023-2025 sollyu.com..
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,10 +26,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutput;
 import java.lang.reflect.Field;
 import java.nio.ByteOrder;
-import java.util.*;
-import java.util.function.Supplier;
+import java.util.Map;
+import java.util.Objects;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
-public class JavaStructPack implements Supplier<byte[]> {
+public class JavaStructPack {
 
     private final IJavaStruct input;
     private final DataOutput outputStream;
@@ -95,7 +97,6 @@ public class JavaStructPack implements Supplier<byte[]> {
         return byteArrayOutputStream.toByteArray();
     }
 
-    @Override
     public byte[] get() {
         try {
             return getWithException();
@@ -112,7 +113,7 @@ public class JavaStructPack implements Supplier<byte[]> {
         Map.Entry<JavaStruct.Field, Field> arrayEntry = null;
         for (Map.Entry<JavaStruct.Field, Field> e : fieldMap.entrySet()) {
             if (Objects.equals(e.getValue().getName(), sizeOf) ||
-                    Objects.equals(e.getValue().getAnnotation(JavaStruct.Field.class).name(), sizeOf)) {
+                Objects.equals(e.getValue().getAnnotation(JavaStruct.Field.class).name(), sizeOf)) {
                 arrayEntry = e;
                 break;
             }

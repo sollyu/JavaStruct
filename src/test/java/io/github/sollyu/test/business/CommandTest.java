@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2023-2025 sollyu.com..
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package io.github.sollyu.test.business;
 
 import io.github.sollyu.struct.IJavaStruct;
@@ -54,9 +70,9 @@ public class CommandTest implements IJavaStruct {
             switch (this.functionId) {
                 case 0x04:
                     Item[] data_ = new Item[]{
-                            new Item(), new Item(), new Item(), new Item(), new Item(),
-                            new Item(), new Item(), new Item(), new Item(), new Item(),
-                            new Item(), new Item(), new Item(), new Item(), new Item(),
+                        new Item(), new Item(), new Item(), new Item(), new Item(),
+                        new Item(), new Item(), new Item(), new Item(), new Item(),
+                        new Item(), new Item(), new Item(), new Item(), new Item(),
                     };
                     try {
                         JavaStruct.unpack(data, data_, ByteOrder.LITTLE_ENDIAN);
@@ -123,8 +139,8 @@ public class CommandTest implements IJavaStruct {
 
                     case 0x0C: {
                         Data0C[] data_ = new Data0C[]{
-                                new Data0C(), new Data0C(), new Data0C(), new Data0C(), new Data0C(),
-                                new Data0C(), new Data0C(), new Data0C(), new Data0C(), new Data0C(),
+                            new Data0C(), new Data0C(), new Data0C(), new Data0C(), new Data0C(),
+                            new Data0C(), new Data0C(), new Data0C(), new Data0C(), new Data0C(),
                         };
                         try {
                             JavaStruct.unpack(data, data_, ByteOrder.LITTLE_ENDIAN);
@@ -155,7 +171,7 @@ public class CommandTest implements IJavaStruct {
                 public int frame;
 
                 @JavaStruct.Field(order = 2)
-                public int mask ;
+                public int mask;
             }
 
             public static class Data05 implements IJavaStruct {
@@ -203,9 +219,9 @@ public class CommandTest implements IJavaStruct {
     @Test
     public void test() {
         String hexString = "23 00 00 00 00 67 00 04 01 01 00 00 02 08 00 64 00 00 00 05 00 00 00 03 08 00 E8 07 00 00 " +
-                "FF FF FF FF 04 03 00 01 00 00 05 0F 00 01 00 0B 00 E0 07 00 00 23 14 51 81 16 B7 01 06 03 00 01 00 " +
-                "00 07 01 00 01 08 01 00 01 09 01 00 01 0A 0C 00 E0 07 00 00 30 00 00 00 00 00 00 00 0B 02 00 00 00 " +
-                "0C 0B 00 01 01 00 02 02 04 00 10 27 01 78";
+            "FF FF FF FF 04 03 00 01 00 00 05 0F 00 01 00 0B 00 E0 07 00 00 23 14 51 81 16 B7 01 06 03 00 01 00 " +
+            "00 07 01 00 01 08 01 00 01 09 01 00 01 0A 0C 00 E0 07 00 00 30 00 00 00 00 00 00 00 0B 02 00 00 00 " +
+            "0C 0B 00 01 01 00 02 02 04 00 10 27 01 78";
         byte[] bytes = StringUtils.hexStringToByteArray(hexString);
 
         CommandTest commandTest = new CommandTest();
@@ -215,7 +231,7 @@ public class CommandTest implements IJavaStruct {
 
         {
             Data.Item item02 = commandTest.data.getData()[2];
-            Assertions.assertInstanceOf(Data.Item.Data03.class,item02.getData());
+            Assertions.assertInstanceOf(Data.Item.Data03.class, item02.getData());
             Data.Item.Data03 data03 = (Data.Item.Data03) item02.getData();
             Assertions.assertEquals(data03.frame, 0x07E8);
             Assertions.assertEquals(data03.mask, 0xFFFFFFFF);
@@ -223,7 +239,7 @@ public class CommandTest implements IJavaStruct {
 
         {
             Data.Item item04 = commandTest.data.getData()[4];
-            Assertions.assertInstanceOf(Data.Item.Data05.class,item04.getData());
+            Assertions.assertInstanceOf(Data.Item.Data05.class, item04.getData());
             Data.Item.Data05 data05 = (Data.Item.Data05) item04.getData();
             Assertions.assertEquals(data05.length, 0x01);
             Assertions.assertEquals(data05.data.length, 0x01);
@@ -234,7 +250,7 @@ public class CommandTest implements IJavaStruct {
 
         {
             Data.Item item0B = commandTest.data.getData()[11];
-            Assertions.assertInstanceOf(Data.Item.Data0C[].class,item0B.getData());
+            Assertions.assertInstanceOf(Data.Item.Data0C[].class, item0B.getData());
             Data.Item.Data0C[] data0C = (Data.Item.Data0C[]) item0B.getData();
             Assertions.assertEquals(data0C.length, 2);
             Data.Item.Data0C data0C0 = data0C[0];

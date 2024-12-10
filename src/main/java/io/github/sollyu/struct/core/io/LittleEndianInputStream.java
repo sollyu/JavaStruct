@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 sollyu.com.
+ * Copyright (c) 2023-2025 sollyu.com..
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,12 +32,12 @@ public class LittleEndianInputStream implements DataInput {
     }
 
     @Override
-    public void readFully(byte @NotNull [] b) throws IOException {
+    public void readFully(@NotNull byte[] b) throws IOException {
         dataInputStream.readFully(b);
     }
 
     @Override
-    public void readFully(byte @NotNull [] b, int off, int len) throws IOException {
+    public void readFully(@NotNull byte[] b, int off, int len) throws IOException {
         dataInputStream.readFully(b, off, len);
     }
 

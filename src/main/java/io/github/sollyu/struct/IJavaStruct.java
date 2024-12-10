@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 sollyu.com.
+ * Copyright (c) 2023-2025 sollyu.com..
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,7 +42,7 @@ public interface IJavaStruct {
      * @param data      数据
      * @param byteOrder 字节序
      */
-    default void fromBytes(byte @NotNull [] data, @NotNull ByteOrder byteOrder) {
+    default void fromBytes(@NotNull byte[] data, @NotNull ByteOrder byteOrder) {
         JavaStruct.unpack(data, this, byteOrder);
     }
 

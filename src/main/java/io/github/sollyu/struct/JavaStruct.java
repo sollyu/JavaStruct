@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 sollyu.com.
+ * Copyright (c) 2023-2025 sollyu.com..
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,11 +21,9 @@ import io.github.sollyu.struct.core.JavaStructUnpack;
 import io.github.sollyu.struct.core.io.BigEndianInputStream;
 import io.github.sollyu.struct.core.io.LittleEndianInputStream;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInput;
-import java.io.IOException;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -67,14 +65,14 @@ public class JavaStruct {
      * @param output    输出对象
      * @param byteOrder 字节序
      */
-    public static void unpack(byte @NotNull [] data, @NotNull IJavaStruct output, @NotNull ByteOrder byteOrder) {
+    public static void unpack(@NotNull byte[] data, @NotNull IJavaStruct output, @NotNull ByteOrder byteOrder) {
         new JavaStructUnpack(data, output, byteOrder).run();
     }
 
-    public static void unpack(byte @NotNull [] data, IJavaStruct @NotNull [] output, @NotNull ByteOrder byteOrder) {
+    public static void unpack(@NotNull byte[] data, @NotNull IJavaStruct[] output, @NotNull ByteOrder byteOrder) {
         DataInput dataInputStream = byteOrder == ByteOrder.BIG_ENDIAN ?
-                new BigEndianInputStream(new ByteArrayInputStream(data)) :
-                new LittleEndianInputStream(new ByteArrayInputStream(data));
+            new BigEndianInputStream(new ByteArrayInputStream(data)) :
+            new LittleEndianInputStream(new ByteArrayInputStream(data));
 
         for (IJavaStruct iJavaStruct : output) {
             new JavaStructUnpack(dataInputStream, iJavaStruct).run();

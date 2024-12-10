@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 sollyu.com.
+ * Copyright (c) 2023-2025 sollyu.com..
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,5 +16,3 @@
 
 package io.github.sollyu.struct;
 
-import io.github.sollyu.struct.IJavaStruct;
-import io.github.sollyu.struct.JavaStruct;

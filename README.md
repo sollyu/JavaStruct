@@ -10,7 +10,7 @@ JavaStruct是一个用于Java的结构体库，它可以让你像C语言一样�
 
 ```gradle
 dependencies {
-    implementation 'com.github.sollyu:JavaStruct:1.1.5'
+    implementation 'com.github.sollyu:JavaStruct:1.1.9'
 }
 ```
 
@@ -46,6 +46,7 @@ input.data = new CommandItem01[] { item1, item2 };
 
 byte[] output = JavaStruct.pack(input, ByteOrder.LITTLE_ENDIAN);
 ```
+
 此时output的值为：`01 02 00 01 03 00 01 06 0E 01 03 00 00 06 0E`
 
 这里的`length`字段会自动计算，所以不需要手动赋值。
@@ -89,6 +90,7 @@ input.serverId = 0x01;
 // 这里手动赋值被擦除的类型
 input.data = new short[] { 0x01, 0x02, 0x03 };
 ```
+
 ## 示例
 
 请参阅[测试用例](./src/test/java/io/github/sollyu/test/StructTest.java)。

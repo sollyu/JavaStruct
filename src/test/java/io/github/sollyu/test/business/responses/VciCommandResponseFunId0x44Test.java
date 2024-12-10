@@ -1,16 +1,29 @@
+/*
+ * Copyright (c) 2023-2025 sollyu.com..
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package io.github.sollyu.test.business.responses;
 
 import com.google.common.hash.HashCode;
-
+import io.github.sollyu.struct.IJavaStruct;
+import io.github.sollyu.struct.JavaStruct;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.nio.ByteOrder;
 import java.util.Locale;
-
-import io.github.sollyu.struct.IJavaStruct;
-import io.github.sollyu.struct.JavaStruct;
-import io.github.sollyu.test.utils.StringUtils;
 
 public class VciCommandResponseFunId0x44Test implements VciCommandResponseFunId {
 
@@ -20,7 +33,7 @@ public class VciCommandResponseFunId0x44Test implements VciCommandResponseFunId 
     public VciCommandResponseBase.Sub sub0x04 = null;
     public VciCommandResponseBase.Sub sub0x05 = null;
     public VciCommandResponseBase.Sub sub0x06 = null;
-    public Sub0x07                    sub0x07 = null;
+    public Sub0x07 sub0x07 = null;
     public VciCommandResponseBase.Sub sub0x08 = null;
     public VciCommandResponseBase.Sub sub0x09 = null;
     public VciCommandResponseBase.Sub sub0x0A = null;
@@ -80,6 +93,7 @@ public class VciCommandResponseFunId0x44Test implements VciCommandResponseFunId 
 
     public interface Sub0x07 extends IJavaStruct {
         byte getState();
+
         Sub0x07Success caseSuccess();
     }
 
@@ -127,7 +141,7 @@ public class VciCommandResponseFunId0x44Test implements VciCommandResponseFunId 
 
             /**
              * 检查数据是否消极<br>
-             *
+             * <p>
              * 03 00 7F 23 7F  //ECU正常消极, 23 7F为消极码<br>
              * 01 00 FF //ECU恢复超时 下位机填充的<br>
              *
@@ -135,10 +149,10 @@ public class VciCommandResponseFunId0x44Test implements VciCommandResponseFunId 
              */
             public boolean isNegativeData() {
                 if (dataSize == 0x01) {
-                    return data[0] == (byte)0xFF;
+                    return data[0] == (byte) 0xFF;
                 }
                 if (dataSize == 0x03) {
-                    return data[0] == (byte)0x7F;
+                    return data[0] == (byte) 0x7F;
                 }
                 return false;
             }
